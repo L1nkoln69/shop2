@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+   .outline {
+       border: 1px solid black;
+       padding: 0 10px;
+   }
+hr {
+    border: none; /* Убираем границу */
+    background-color: black; /* Цвет линии */
+    color: black; /* Цвет линии для IE6-7 */
+    height: 1px; /* Толщина линии */
+   }
+
+</style>
+<body>
+<div class="outline">
+    <br>
+    <img src="{{ product.image.url }}" >
+    <br>
+          <h1 style="color: white">{{ product.title }}</h1>
+          <div class="card-body">
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group"><span class="fs-4" style="color: white">{{product.price}} {{product.currency}}</span></div>
+                <small class="text-muted" style="color: white">Amount - {{product.amount}}</small>
+              </div>
+              <p class="price">${{ product.price }}</p>
+        <form action="{% url 'cart_add' product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input type="submit" value="Add to cart">
+        </form>
+
+</body>
+{% endblock %}
